@@ -1,12 +1,12 @@
 const Jimp = require('jimp');
 require('dotenv').config();
 
-//runLocal();
+runLocal();
 
 async function runLocal(){
   const holder = await entrypoint({queryStringParameters:{category: "category", color: "FF0000", text: "What is your name?"}});
 
-  const image = await holder.writeAsync("./resized/test.png");
+  const image = await holder.writeAsync("./resized/test2.png");
 
   console.log("Saved in " + "./resized/test.png");
 }
@@ -61,11 +61,14 @@ async function createCard(category, color, text){
   const left = 30;
   const top = 30;
   const holder = await new Jimp(w, h, color);
+  //Jimp.FONT_SANS_32_WHITE);
   //https://github.com/oliver-moran/jimp/tree/master/packages/plugin-print/fonts
-  const font32 = await Jimp.loadFont("https://raw.githubusercontent.com/oliver-moran/jimp/master/packages/plugin-print/fonts/open-sans/open-sans-64-white/open-sans-64-white.fnt");//Jimp.FONT_SANS_32_WHITE);
-  const font16 = await Jimp.loadFont("https://raw.githubusercontent.com/oliver-moran/jimp/master/packages/plugin-print/fonts/open-sans/open-sans-16-white/open-sans-16-white.fnt");
+  //const font32 = await Jimp.loadFont("https://raw.githubusercontent.com/oliver-moran/jimp/master/packages/plugin-print/fonts/open-sans/open-sans-64-white/open-sans-64-white.fnt");
+  //const font16 = await Jimp.loadFont("https://raw.githubusercontent.com/oliver-moran/jimp/master/packages/plugin-print/fonts/open-sans/open-sans-16-white/open-sans-16-white.fnt");
+  const font32 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeueLTStd-Hv-50-white.fnt");
+  //const font16 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeueLTStd-Hv.-24-white.fnt");
   holder.print(font32, left, top, text, w-(left*2));
-  holder.print(font16, left, 700, category, w-(left*2));
+  //holder.print(font16, left, 700, category, w-(left*2));
   return holder;
 }
 
