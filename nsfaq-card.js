@@ -57,7 +57,8 @@ async function entrypoint(event){
 }
 
 //CONVERT FONT
-//https://ttf2fnt.com/
+//https://ttf2fnt.com/ 
+//https://cloudconvert.com/otf-to-ttf
 
 //Jimp.FONT_SANS_32_WHITE);
 //https://github.com/oliver-moran/jimp/tree/master/packages/plugin-print/fonts
@@ -69,8 +70,8 @@ async function createCard(category, color, text){
   const top = 60;
   const holder = await new Jimp(w, h, color);
   
-  const font24 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/white-24/HelveticaNeueLTStd-Hv.ttf.fnt");
-  const font50 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/white-50/HelveticaNeueLTStd-Hv.ttf.fnt");
+  const font24 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeue-md-white-24/HelveticaNeueLTStd-Md.ttf.fnt");
+  const font50 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeue-md-white-50/HelveticaNeueLTStd-Md.ttf.fnt");
   holder.print(font50, left, top, text, w-(left*2));
   holder.print(font24, left, 700, category, w-(left*2));
   return holder;
