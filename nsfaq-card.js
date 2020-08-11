@@ -4,8 +4,8 @@ require('dotenv').config();
 runLocal();
 
 async function runLocal(){
-  const event = {queryStringParameters:{category: "category", color: "FF0000", text: "What is your name?"}};
-  const holder = await entrypoint(null);
+  const event = {queryStringParameters:{category: "CAREERS AND MOTIVATION", color: "18A63F", text: "Qual é a importância em ter a mesma religião e valores ao criar um filho com alguém?"}};
+  const holder = await entrypoint(event);
 
   const image = await holder.writeAsync("./cards/test.png");
 
@@ -56,7 +56,10 @@ async function entrypoint(event){
   }
 }
 
+
+
 //CONVERT FONT
+//https://www.71squared.com/ (BEST but paid)
 //https://ttf2fnt.com/ 
 //https://cloudconvert.com/otf-to-ttf
 
@@ -69,9 +72,10 @@ async function createCard(category, color, text){
   const left = 60;
   const top = 60;
   const holder = await new Jimp(w, h, color);
-  
-  const font24 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeue-md-white-24/HelveticaNeueLTStd-Md.ttf.fnt");
-  const font50 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeue-md-white-50/HelveticaNeueLTStd-Md.ttf.fnt");
+  //const font24 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeueLTStd-Bd-white-24/HelveticaNeueLTStd-Bd.ttf.fnt");
+  //const font50 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeueLTStd-Bd-white-50/HelveticaNeueLTStd-Bd.ttf.fnt");
+  const font50 = await Jimp.loadFont("./fonts/white50.fnt");
+  const font24 = await Jimp.loadFont("./fonts/white24.fnt");
   holder.print(font50, left, top, text, w-(left*2));
   holder.print(font24, left, 700, category, w-(left*2));
   return holder;
