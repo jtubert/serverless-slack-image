@@ -55,6 +55,10 @@ async function entrypoint(event){
   }
 }
 
+//CONVERT FONT
+
+//https://ttf2fnt.com/
+
 async function createCard(category, color, text){
   const w = 564;
   const h = 789;
@@ -65,7 +69,7 @@ async function createCard(category, color, text){
   //https://github.com/oliver-moran/jimp/tree/master/packages/plugin-print/fonts
   //const font32 = await Jimp.loadFont("https://raw.githubusercontent.com/oliver-moran/jimp/master/packages/plugin-print/fonts/open-sans/open-sans-64-white/open-sans-64-white.fnt");
   //const font16 = await Jimp.loadFont("https://raw.githubusercontent.com/oliver-moran/jimp/master/packages/plugin-print/fonts/open-sans/open-sans-16-white/open-sans-16-white.fnt");
-  const font32 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeueLTStd-Hv-50-white.fnt");
+  const font32 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeueLTStd-Hv.ttf.fnt");
   //const font16 = await Jimp.loadFont("https://raw.githubusercontent.com/jtubert/serverless-slack-image/master/fonts/HelveticaNeueLTStd-Hv.-24-white.fnt");
   holder.print(font32, left, top, text, w-(left*2));
   //holder.print(font16, left, 700, category, w-(left*2));
@@ -84,9 +88,9 @@ async function uploadBufferToS3(buffer, filename, location){
 
 
   AWS.config.update({
-    accessKeyId: 'AKIAQTKQ4B5NWOP263HB', 
-    secretAccessKey: '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',
-    region: 'us-east-1'
+    accessKeyId: process.env.accessKeyId, 
+    secretAccessKey: process.env.secretAccessKey,
+    region: process.env.region
   });
   // Create S3 service object
   const s3 = new AWS.S3({apiVersion: '2006-03-01'});
